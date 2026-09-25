@@ -1,0 +1,14 @@
+{
+  "name": "@karma/ledger-theme",
+  "version": "1.0.0",
+  "description": "Karma Ledger — the shared Tailwind 4 theme and fonts for karma-app.ca and the Karma Phoenix app.",
+  "license": "SEE LICENSE IN priv/static/fonts/*-OFL.txt",
+  "private": true,
+  "files": [
+    "assets/css",
+    "priv/static/fonts"
+  ],
+  "exports": {
+    "./karma_ledger.css": "./assets/css/karma_ledger.css"
+  }
+}

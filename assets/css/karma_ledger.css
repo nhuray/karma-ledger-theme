@@ -1,0 +1,164 @@
+/*
+ * Karma Ledger — Tailwind 4 theme
+ *
+ * Source of truth for both karma-app.ca (Astro) and the Karma Phoenix app.
+ * Generated from tokens.json in the Karma Ledger design kit. A theme change
+ * is always a new tag of @karma/ledger-theme, bumped in both consumers —
+ * never edit this file inside a consuming project.
+ *
+ * Consumers must serve the four font files at /fonts/<name>.woff2 (Astro:
+ * public/fonts/, Phoenix: priv/static/fonts/) — the @font-face rules below
+ * assume that shared, root-relative URL.
+ */
+
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("/fonts/Newsreader-Italic-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  /* Type — one job per family. Geist for interface and headlines, Newsreader
+     for the voice of the law, Geist Mono for references only. */
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Colour — the "Paper" theme. One light ground; accent is the only brand
+     hue and is the white-label override point (see the hook below). */
+  --color-paper: #f6f5f1;
+  --color-surface: #ffffff;
+  --color-surface-soft: #fbfaf7;
+  --color-surface-sunken: #efede7;
+
+  --color-line: #e4e1d9;
+  --color-line-strong: #dad6cd;
+  --color-line-control: #cfcbc1;
+
+  --color-ink: #15161a;
+  --color-ink-secondary: #4a4d55;
+  --color-ink-muted: #6b6e76;
+  --color-ink-faint: #b5b1a7;
+
+  --color-accent: var(--karma-accent, #2b45c9);
+  --color-accent-soft: var(--karma-accent-soft, rgba(43, 69, 201, 0.1));
+  --color-on-accent: #ffffff;
+
+  --color-judgment: #8a5200;
+  --color-judgment-soft: #fbf0dc;
+  --color-judgment-panel: #fdf6ea;
+  --color-judgment-line: #e9c98e;
+  --color-judgment-mark: #b8741a;
+
+  --color-settled: #1e6b45;
+  --color-settled-soft: #e3f2e9;
+  --color-settled-mark: #1e8a55;
+
+  --color-inverse: #15161a;
+  --color-on-inverse: #f6f5f1;
+  --color-on-inverse-muted: #b7b9bf;
+  --color-inverse-line: #45474e;
+
+  /* Radii — space-32/gutter/etc reuse Tailwind's default 4px spacing scale
+     as-is (space-32 = p-32 = 8rem = 128px), so only radii and shadows need
+     new tokens here. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 14px;
+  --radius-3xl: 20px;
+  --radius-pill: 999px;
+
+  --shadow-window: 0 1px 0 #e4e1d9, 0 40px 100px rgba(21, 22, 26, 0.1);
+  --shadow-sheet: 0 24px 60px rgba(21, 22, 26, 0.07);
+  --shadow-popover: 0 12px 32px rgba(21, 22, 26, 0.18);
+  --shadow-selected: 0 6px 20px rgba(21, 22, 26, 0.08);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * White-label hook
+ *
+ * A firm's own brand appears only on what its clients see (the client
+ * portal, letters, statements) — never on the Karma marketing site or the
+ * firm-facing app chrome. To brand one surface, set both custom properties
+ * on a wrapping element; --color-accent-soft must stay a 10%-alpha tint of
+ * the same colour. Never override grounds, inks or the judgment/settled
+ * status families — those must look identical in every firm's colours.
+ *
+ *   <div style="--karma-accent: #1F6B4A; --karma-accent-soft: rgba(31,107,74,0.10)">
+ *     ...
+ *   </div>
+ */
